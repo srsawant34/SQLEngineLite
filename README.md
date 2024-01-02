@@ -24,3 +24,68 @@ The SQL interface comprises a set of APIs bridging the interaction between the c
 
 5. **libMexpr.a:** 
 libMexpr.a is a math expression parser package that processes mathematical expressions, generating parse trees from input expressions typically found in select queries applied to columns. This file is compiled from this [package](https://github.com/sachinites/MathExpressionParser).
+
+
+
+The project is based on a Udemy course; for in-depth understanding, refer to this [course](https://www.udemy.com/course/rdbmsdev/).
+
+## Run
+
+- First, clone the repository:
+```bash
+gh repo clone srsawant34/SimpleSQLEngine
+```
+
+- Compile the project:
+```bash
+cd SqlParser
+sh compile.sh
+```
+
+- Running the project:
+```bash
+./dbms.exe
+```
+
+### MacOS
+
+For macOS, I would recommend to use docker
+
+- make dockerfile:
+```dockerfile
+# Use an official Ubuntu base image
+FROM ubuntu:latest
+
+# Install necessary packages
+RUN apt-get update && \
+    apt-get install -y \
+    git \
+    g++ \
+    flex \
+    sudo
+
+# Set up a non-root user with sudo privileges
+RUN useradd -ms /bin/bash user && \
+    usermod -aG sudo user && \
+    echo 'user ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+# Set the working directory to the user's home directory
+WORKDIR /home/user
+
+# Switch to the non-root user
+USER user
+```
+
+- building the docker image:
+
+```bash
+docker build . -t ubuntu
+```
+
+- running the container in interactive mode
+
+```bash
+docker run -it ubuntu
+```
+
+And repeat the above steps to run the project. 
